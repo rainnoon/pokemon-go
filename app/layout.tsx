@@ -19,6 +19,7 @@ import {
 import { config } from "@/config";
 import Loading from "@/components/myUi/loading";
 import { GlobalContextProvider } from "@/context";
+import { AaF } from "@/public/font";
 
 const queryClient = new QueryClient();
 
@@ -33,10 +34,11 @@ export default function RootLayout({
         <WagmiProvider config={config}>
           <QueryClientProvider client={queryClient}>
             <RainbowKitProvider
+              modalSize="compact"
               theme={darkTheme({
-                accentColor: "#7b3fe4",
+                accentColor: "#ffc000",
                 accentColorForeground: "white",
-                borderRadius: "small",
+                borderRadius: "medium",
                 fontStack: "system",
                 overlayBlur: "small",
               })}

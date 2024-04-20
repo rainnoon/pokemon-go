@@ -1,8 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@font-face {
+  font-family: 'AAFENGKUANGYUANSHIREN-2';
+  src: url('/font/AAFENGKUANGYUANSHIREN-2.woff') format('woff') ;
+  font-weight: normal;
+  font-style: normal;
+}
 @layer base {
+
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;

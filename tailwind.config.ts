@@ -80,6 +80,9 @@ const config = {
         "100": "100",
         "999": "999",
       },
+      fontFamily: {
+        aa: ["AAFENGKUANGYUANSHIREN-2"], // 使用你在 @font-face 中定义的字体名
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
