@@ -80,6 +80,9 @@ const config = {
         "100": "100",
         "999": "999",
       },
+      rotate: {
+        "30": "30deg",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

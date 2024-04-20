@@ -20,6 +20,8 @@ import { config } from "@/config";
 import Loading from "@/components/myUi/loading";
 import { GlobalContextProvider } from "@/context";
 import { AaF } from "@/public/font";
+import MyConnectButton from "@/components/myConnectButton";
+import React from "react";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +48,7 @@ export default function RootLayout({
               <GlobalContextProvider>
                 {" "}
                 <Loading></Loading>
+                <MyConnectButton></MyConnectButton>
                 {children}
               </GlobalContextProvider>
             </RainbowKitProvider>
