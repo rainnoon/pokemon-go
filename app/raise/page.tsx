@@ -11,6 +11,7 @@ const Raise: React.FC<RaiseProps> = (props) => {
   const {} = props;
   const imgRef = useRef<any>();
   const [dimensions, setDimensions] = useState(0);
+  const [showMoney, setShowMoney] = useState(false);
   useEffect(() => {
     if (imgRef.current) {
       console.log(imgRef.current.offsetWidth, 1);
@@ -42,18 +43,37 @@ const Raise: React.FC<RaiseProps> = (props) => {
         ></div>
         <div className="fixed  text-white text-3xl flex flex-col justify-center items-center top-[6rem]  h-[22rem] w-[25rem]  bg-[#ffc000] rounded-[4rem]  shadow-2xl shadow-[rgba(191,144,0,0.1)]">
           {" "}
-          <span className="absolute right-4 cursor-pointer z-40">{`>`}</span>
-          <div className="fixed  flex flex-col justify-center items-center">
-            <Image
-              src={gif1}
-              alt={"1"}
-              className="size-[8rem] cursor-pointer"
-            ></Image>
-            <span>二狗</span>
-            <span>现在心情很好！</span>
-            <span>能量：100</span>
-            <span>心情：97</span>
-          </div>
+          <span
+            className={`
+               absolute ${showMoney ? "left-4 rotate-180" : "right-4"}   cursor-pointer z-40 
+            `}
+            onClick={() => setShowMoney(!showMoney)}
+          >{`>`}</span>
+          {!showMoney ? (
+            <div className="fixed  flex flex-col justify-center items-center">
+              <Image
+                src={gif1}
+                alt={"1"}
+                className="size-[8rem] cursor-pointer"
+              ></Image>
+              <span>二狗</span>
+              <span>现在心情很好！</span>
+              <span>能量：100</span>
+              <span>心情：97</span>
+            </div>
+          ) : (
+            <div className="fixed  flex flex-col justify-center items-center">
+              <span className="fixed top-[10rem] text-[5rem]">
+                存款
+              </span>
+              <div className="text-[3rem] mt-7">
+                <span>$0.2</span> <span>ETH</span>
+              </div>{" "}
+              <div className="text-[3rem] mt-10">
+                <span>$3.21</span> <span>TEA</span>
+              </div>
+            </div>
+          )}
         </div>
         <Image
           src={headImg2}

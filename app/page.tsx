@@ -75,7 +75,14 @@ const Home: NextPage = () => {
               "transform  3s ease-in-out, top 3s ease-in-out,opacity 1s ease-in-out",
           }} // 应用动态样式
         ></Image>
-        <ChooseModal></ChooseModal>
+        {!rotate && (
+          <ChooseModal
+            className={`${!disappear ? "opacity-0" : "opacity-100"} `}
+            style={{
+              transition: "opacity 6s ease-in-out",
+            }}
+          ></ChooseModal>
+        )}
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 interface MyConnectButtonProps {}
@@ -7,9 +7,41 @@ const MyConnectButton: React.FC<MyConnectButtonProps> = (
 ) => {
   const {} = props;
   const [showChain, setShowChain] = useState(false);
+  const connectButtonRef = useRef<any>(null); // 创建 ref
+  useEffect(() => {
+    // 处理点击事件
+    function handleClickOutside(event: any) {
+      console.log(
+        connectButtonRef.current.contains(event.target),
+      );
+      if (
+        connectButtonRef.current &&
+        !connectButtonRef.current.contains(event.target)
+      ) {
+        console.log("点击外部");
+        setShowChain(false); // 如果点击在 ConnectButton 外面，设置 showChain 为 false
+      }
+    }
 
+    // 添加事件监听器
+    document.addEventListener(
+      "mousedown",
+      handleClickOutside,
+    );
+
+    // 清理函数
+    return () => {
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside,
+      );
+    };
+  }, []);
   return (
-    <div className="    z-20 flex fixed">
+    <div
+      className="    z-20 flex fixed"
+      ref={connectButtonRef}
+    >
       <div className="absolute bottom-24">
         <ConnectButton.Custom>
           {({

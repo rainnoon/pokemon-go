@@ -6,9 +6,12 @@ import gif3 from "@/public/pet/gif/3.gif";
 import gif4 from "@/public/pet/gif/4.gif";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-interface ChooseModalProps {}
+interface ChooseModalProps {
+  className?: string;
+  style?: any;
+}
 const ChooseModal: React.FC<ChooseModalProps> = (props) => {
-  const {} = props;
+  const { className, style } = props;
   const router = useRouter();
   const handleClick = () => {
     router.push("/raise");
@@ -16,7 +19,10 @@ const ChooseModal: React.FC<ChooseModalProps> = (props) => {
 
   return (
     <>
-      <div className="fixed z-20 top-1/2 -translate-y-1/3 flex justify-center">
+      <div
+        className={`fixed z-20 top-1/2 -translate-y-1/3 flex justify-center ${className}`}
+        style={style}
+      >
         <div className="h-[30rem] w-[25rem]  bg-[#ffc000] rounded-[4rem]  shadow-2xl shadow-[rgba(191,144,0,0.1)]"></div>
         <span className="absolute top-3 text-white text-[2rem] ">
           选择你的宝可梦
