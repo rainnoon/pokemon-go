@@ -11,6 +11,8 @@ import MyConnectButton from "@/components/myConnectButton";
 import { useAccount, useAccountEffect } from "wagmi";
 import headImg from "@/public/head.png";
 import headImg2 from "@/public/head2.png";
+import ChooseModal from "@/components/chooseModal";
+import { router } from "next/client";
 const Home: NextPage = () => {
   const [rotate, setRotate] = useState(-30); // 初始旋转度数为 -30
   const [showOverlay, setShowOverlay] = useState(false); // 控制遮罩显示的状态
@@ -73,6 +75,7 @@ const Home: NextPage = () => {
               "transform  3s ease-in-out, top 3s ease-in-out,opacity 1s ease-in-out",
           }} // 应用动态样式
         ></Image>
+        <ChooseModal></ChooseModal>
       </div>
     </>
   );

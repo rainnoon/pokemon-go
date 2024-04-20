@@ -9,7 +9,7 @@ const MyConnectButton: React.FC<MyConnectButtonProps> = (
   const [showChain, setShowChain] = useState(false);
 
   return (
-    <div className="  w-screen h-screen z-20 flex fixed">
+    <div className="    z-20 flex fixed">
       <div className="absolute bottom-24">
         <ConnectButton.Custom>
           {({
