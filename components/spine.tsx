@@ -4,9 +4,17 @@ import { Spine } from "@pixi/spine-pixi";
 
 interface SpineTestProps {
   index: number;
+  isActive: boolean;
+  handleClick: () => void;
+  handleDeactivateOther: () => boolean;
 }
 const SpineTest: React.FC<SpineTestProps> = (props) => {
-  const { index } = props;
+  const {
+    index,
+    isActive,
+    handleClick,
+    handleDeactivateOther,
+  } = props;
   const gameRef = useRef<any>(undefined);
   const pixiApp = useRef<any>(undefined);
   const pet1Ref = useRef<any>(undefined);
@@ -25,11 +33,12 @@ const SpineTest: React.FC<SpineTestProps> = (props) => {
     const pixiInit = async () => {
       if (!pixiApp.current) {
         const app = new Application();
-
+        //todo 转rem
         await app.init({
           width: 140, // 或者根据实际需要设置
-          height: 140,
-          backgroundColor: 0x1099bb, // 需要十六进制格式
+          height: 160,
+          backgroundColor: 0xffc000, // 需要十六进制格式
+
           // resizeTo: window,
         });
         pixiApp.current = app;
@@ -106,7 +115,7 @@ const SpineTest: React.FC<SpineTestProps> = (props) => {
           // const midX = canvasWidth / 2;
           // const midY = canvasHeight / 2;
 
-          container1.position.set(70, 120); // 左上角
+          container1.position.set(70, 125); // 左上角
           // container2.position.set(midX, baseY); // 右上角
           // container3.position.set(baseX, midY); // 左下角
           // container4.position.set(midX, midY); // 右下角
@@ -116,7 +125,30 @@ const SpineTest: React.FC<SpineTestProps> = (props) => {
           // pixiApp.current.stage.addChild(container2);
           // pixiApp.current.stage.addChild(container3);
           // pixiApp.current.stage.addChild(container4);
-          //
+
+          // pet1.eventMode = "static";
+          // container1.eventMode = "static";
+          // pet1.cursor = "pointer";
+          // container1.cursor = "pointer";
+          // pet1.on("pointerdown", () => {
+          //   console.log("按下");
+          //   // 设置从当前动画到 win 动画的过渡
+          //   pet1.state.setAnimation(0, "win", false);
+          //   pet1.state.addAnimation(0, "stand", true, 0); // 完成后返回站立状态
+          // });
+          // pet1.on("pointerenter", () => {
+          //   console.log("按下");
+          //   // 设置从当前动画到 win 动画的过渡
+          //   pet1.state.setAnimation(0, "win", false);
+          //   pet1.state.addAnimation(0, "stand", true, 0); // 完成后返回站立状态
+          // });
+          // container1.on("pointerenter", () => {
+          //   console.log("按下");
+          //   // 设置从当前动画到 win 动画的过渡
+          //   pet1.state.setAnimation(0, "win", false);
+          //   pet1.state.addAnimation(0, "stand", true, 0); // 完成后返回站立状态
+          // });
+
           pet1Ref.current = pet1;
           //监听
           app.ticker.add(() => {});
@@ -141,27 +173,35 @@ const SpineTest: React.FC<SpineTestProps> = (props) => {
   }, []);
   useEffect(() => {
     if (!pet1Ref.current) return;
-    if (index == 1) {
-      //平滑过渡
+    console.log("触发切换");
+    if (isActive) {
       pet1Ref.current.state.data.setMix(
-        "hurt",
+        "walk",
         "stand",
         0.2,
       );
-      pet1Ref.current.state.setAnimation(0, "hurt");
-      pet1Ref.current.state.addAnimation(0, "stand", true);
+      pet1Ref.current.state.setAnimation(0, "walk", true);
+    } else if (handleDeactivateOther()) {
+      pet1Ref.current.state.setAnimation(0, "stand", true);
     }
-    // if (index == 2)
-    //   pet1Ref.current.state.data.setMix(
-    //     "skill",
-    //     "holdon",
-    //     0.2,
-    //   );
-    // pet1Ref.current.state.setAnimation(0, "skill");
-    // pet1Ref.current.state.addAnimation(0, "holdon", true);
-    // if (index == 0)
-    //   pet1Ref.current.state.setAnimation(0, "holdon", true);
-  }, [index]);
-  return <div ref={gameRef} />;
+  }, [isActive]);
+  // const handleCanvasClick = () => {
+  //   if (pet1Ref.current) {
+  //     pet1Ref.current.state.data.setMix(
+  //       "walk",
+  //       "stand",
+  //       0.2,
+  //     );
+  //     pet1Ref.current.state.setAnimation(0, "walk", true);
+  //     // pet1Ref.current.state.addAnimation(0, "stand", true);
+  //   }
+  // };
+  return (
+    <div
+      ref={gameRef}
+      style={{ pointerEvents: "all" }}
+      onClick={handleClick}
+    />
+  );
 };
 export default SpineTest;

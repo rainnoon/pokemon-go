@@ -1,11 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import gif1 from "@/public/pet/gif/1.gif";
 import gif2 from "@/public/pet/gif/2.gif";
 import gif3 from "@/public/pet/gif/3.gif";
 import gif4 from "@/public/pet/gif/4.gif";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Spine from "@/components/spine";
 interface ChooseModalProps {
   className?: string;
   style?: any;
@@ -16,7 +17,11 @@ const ChooseModal: React.FC<ChooseModalProps> = (props) => {
   const handleClick = () => {
     router.push("/raise");
   };
+  const [activeIndex, setActiveIndex] = useState(-1);
 
+  const handleSetActive = (index: number) => {
+    setActiveIndex(index); // 设置当前激活的组件
+  };
   return (
     <>
       <div
@@ -28,27 +33,40 @@ const ChooseModal: React.FC<ChooseModalProps> = (props) => {
           选择你的宝可梦
         </span>
         <div className="flex h-[20rem] w-[25rem] absolute  top-14   flex-wrap justify-between px-10  ">
-          {/*todo 点击后切换到win动画*/}
-          <Image
-            src={gif1}
-            alt={"1"}
-            className="size-[8rem] cursor-pointer"
-          ></Image>
-          <Image
-            src={gif2}
-            alt={"1"}
-            className="size-[8rem] cursor-pointer"
-          ></Image>
-          <Image
-            src={gif3}
-            alt={"1"}
-            className="size-[8rem] cursor-pointer"
-          ></Image>
-          <Image
-            src={gif4}
-            alt={"1"}
-            className="size-[8rem] cursor-pointer"
-          ></Image>
+          {/*  note gpt写的有点牛逼*/}
+          {[1, 2, 3, 4].map((index) => (
+            <Spine
+              key={index}
+              index={index}
+              isActive={activeIndex === index}
+              handleClick={() => {
+                handleSetActive(index);
+                console.log("触发切换2");
+              }}
+              handleDeactivateOther={() => {
+                if (activeIndex !== index) {
+                  // 如果不是当前点击的组件，设置为stand
+                  return true; // 根据具体逻辑可能需要修改
+                }
+                return false;
+              }}
+            />
+          ))}
+          {/*<Image*/}
+          {/*  src={gif2}*/}
+          {/*  alt={"1"}*/}
+          {/*  className="size-[8rem] cursor-pointer"*/}
+          {/*></Image>*/}
+          {/*<Image*/}
+          {/*  src={gif3}*/}
+          {/*  alt={"1"}*/}
+          {/*  className="size-[8rem] cursor-pointer"*/}
+          {/*></Image>*/}
+          {/*<Image*/}
+          {/*  src={gif4}*/}
+          {/*  alt={"1"}*/}
+          {/*  className="size-[8rem] cursor-pointer"*/}
+          {/*></Image>*/}
         </div>
 
         <input
