@@ -1,0 +1,160 @@
+
+3.png
+size: 326,78
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+PET6007_datuil
+  rotate: false
+  xy: 298, 16
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+PET6007_datuir
+  rotate: true
+  xy: 222, 2
+  size: 18, 20
+  orig: 18, 25
+  offset: 0, 5
+  index: -1
+PET6007_duzi
+  rotate: true
+  xy: 2, 2
+  size: 50, 53
+  orig: 50, 53
+  offset: 0, 0
+  index: -1
+PET6007_jiaozhanl
+  rotate: true
+  xy: 185, 2
+  size: 17, 10
+  orig: 17, 10
+  offset: 0, 0
+  index: -1
+PET6007_jiaozhanr
+  rotate: true
+  xy: 244, 2
+  size: 18, 16
+  orig: 18, 16
+  offset: 0, 0
+  index: -1
+PET6007_ke
+  rotate: true
+  xy: 122, 53
+  size: 23, 51
+  orig: 29, 60
+  offset: 0, 0
+  index: -1
+PET6007_putonzui
+  rotate: false
+  xy: 57, 3
+  size: 28, 6
+  orig: 28, 7
+  offset: 0, 0
+  index: -1
+PET6007_shouzhanl
+  rotate: true
+  xy: 201, 19
+  size: 28, 19
+  orig: 28, 19
+  offset: 0, 0
+  index: -1
+PET6007_shouzhanr
+  rotate: true
+  xy: 121, 2
+  size: 21, 25
+  orig: 24, 25
+  offset: 0, 0
+  index: -1
+PET6007_tou
+  rotate: false
+  xy: 57, 11
+  size: 44, 41
+  orig: 44, 41
+  offset: 0, 0
+  index: -1
+PET6007_wei
+  rotate: false
+  xy: 175, 49
+  size: 41, 27
+  orig: 41, 27
+  offset: 0, 0
+  index: -1
+PET6007_yanbishang
+  rotate: false
+  xy: 218, 50
+  size: 38, 26
+  orig: 38, 26
+  offset: 0, 0
+  index: -1
+PET6007_yangongji
+  rotate: false
+  xy: 258, 50
+  size: 38, 26
+  orig: 38, 26
+  offset: 0, 0
+  index: -1
+PET6007_yanputong
+  rotate: true
+  xy: 298, 38
+  size: 38, 26
+  orig: 38, 26
+  offset: 0, 0
+  index: -1
+PET6007_yanshenli
+  rotate: false
+  xy: 121, 25
+  size: 38, 26
+  orig: 41, 26
+  offset: 0, 0
+  index: -1
+PET6007_yanshouji
+  rotate: false
+  xy: 161, 21
+  size: 38, 26
+  orig: 38, 26
+  offset: 0, 0
+  index: -1
+PET6007_yansiwang
+  rotate: false
+  xy: 222, 22
+  size: 38, 26
+  orig: 38, 26
+  offset: 0, 0
+  index: -1
+PET6007_zuidazhao
+  rotate: true
+  xy: 103, 17
+  size: 35, 16
+  orig: 41, 24
+  offset: 3, 4
+  index: -1
+PET6007_zuigongji
+  rotate: true
+  xy: 262, 13
+  size: 35, 16
+  orig: 41, 24
+  offset: 3, 4
+  index: -1
+PET6007_zuishengli
+  rotate: true
+  xy: 280, 13
+  size: 35, 16
+  orig: 41, 24
+  offset: 3, 4
+  index: -1
+PET6007_zuisiwang
+  rotate: false
+  xy: 148, 3
+  size: 35, 16
+  orig: 41, 24
+  offset: 3, 4
+  index: -1
+pet_yinying
+  rotate: false
+  xy: 2, 54
+  size: 118, 22
+  orig: 120, 24
+  offset: 1, 1
+  index: -1

@@ -1,0 +1,153 @@
+
+2.png
+size: 192,139
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+PET6004_datuil
+  rotate: true
+  xy: 156, 50
+  size: 22, 23
+  orig: 23, 29
+  offset: 0, 6
+  index: -1
+PET6004_datuir
+  rotate: false
+  xy: 89, 32
+  size: 20, 26
+  orig: 21, 26
+  offset: 0, 0
+  index: -1
+PET6004_duzi
+  rotate: false
+  xy: 2, 39
+  size: 46, 74
+  orig: 46, 75
+  offset: 0, 1
+  index: -1
+PET6004_shoul
+  rotate: false
+  xy: 84, 2
+  size: 29, 28
+  orig: 29, 28
+  offset: 0, 0
+  index: -1
+PET6004_shour
+  rotate: true
+  xy: 122, 72
+  size: 23, 32
+  orig: 24, 35
+  offset: 1, 3
+  index: -1
+PET6004_tou
+  rotate: false
+  xy: 122, 97
+  size: 44, 40
+  orig: 70, 64
+  offset: 17, 23
+  index: -1
+PET6004_weiba
+  rotate: false
+  xy: 50, 60
+  size: 53, 53
+  orig: 58, 55
+  offset: 0, 2
+  index: -1
+PET6004_xiaba
+  rotate: true
+  xy: 105, 82
+  size: 31, 15
+  orig: 32, 15
+  offset: 1, 0
+  index: -1
+PET6004_xiaotuil
+  rotate: false
+  xy: 156, 74
+  size: 26, 19
+  orig: 26, 19
+  offset: 0, 0
+  index: -1
+PET6004_xiaotuir
+  rotate: true
+  xy: 115, 25
+  size: 22, 20
+  orig: 22, 20
+  offset: 0, 0
+  index: -1
+PET6004_yanjingbiyang
+  rotate: false
+  xy: 111, 49
+  size: 22, 21
+  orig: 22, 21
+  offset: 0, 0
+  index: -1
+PET6004_yanjinggongji
+  rotate: false
+  xy: 115, 2
+  size: 22, 21
+  orig: 22, 21
+  offset: 0, 0
+  index: -1
+PET6004_yanjingshenqi
+  rotate: false
+  xy: 137, 27
+  size: 22, 21
+  orig: 22, 21
+  offset: 0, 0
+  index: -1
+PET6004_yanjingshiwang
+  rotate: true
+  xy: 139, 3
+  size: 22, 21
+  orig: 22, 21
+  offset: 0, 0
+  index: -1
+PET6004_yanjingshouji
+  rotate: false
+  xy: 161, 27
+  size: 22, 21
+  orig: 22, 21
+  offset: 0, 0
+  index: -1
+PET6004_yanjingzhenchang
+  rotate: true
+  xy: 162, 3
+  size: 22, 21
+  orig: 22, 21
+  offset: 0, 0
+  index: -1
+pet6005_01
+  rotate: true
+  xy: 50, 34
+  size: 24, 37
+  orig: 26, 45
+  offset: 1, 2
+  index: -1
+pet6005_02
+  rotate: false
+  xy: 168, 95
+  size: 22, 42
+  orig: 26, 45
+  offset: 1, 1
+  index: -1
+pet6005_03
+  rotate: true
+  xy: 2, 13
+  size: 24, 44
+  orig: 26, 45
+  offset: 1, 1
+  index: -1
+pet6005_04
+  rotate: true
+  xy: 48, 11
+  size: 21, 34
+  orig: 26, 45
+  offset: 3, 0
+  index: -1
+pet_yinying
+  rotate: false
+  xy: 2, 115
+  size: 118, 22
+  orig: 120, 24
+  offset: 1, 1
+  index: -1
