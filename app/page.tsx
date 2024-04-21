@@ -77,10 +77,7 @@ const Home: NextPage = () => {
         ></Image>
         {!rotate && (
           <ChooseModal
-            className={`${!disappear ? "opacity-0" : "opacity-100"} `}
-            style={{
-              transition: "opacity 6s ease-in-out",
-            }}
+            className={`${!disappear ? "opacity-0" : "animate-show-up"} `}
           ></ChooseModal>
         )}
       </div>

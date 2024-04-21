@@ -174,6 +174,7 @@ const SpineTest: React.FC<SpineTestProps> = (props) => {
   useEffect(() => {
     if (!pet1Ref.current) return;
     console.log("触发切换");
+    //note 原生不行，所以用的这个
     if (isActive) {
       pet1Ref.current.state.data.setMix(
         "walk",
