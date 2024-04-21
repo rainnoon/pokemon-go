@@ -13,11 +13,13 @@ import headImg from "@/public/head.png";
 import headImg2 from "@/public/head2.png";
 import ChooseModal from "@/components/chooseModal";
 import { router } from "next/client";
+import { useGlobalContext } from "@/context";
 const Home: NextPage = () => {
   const [rotate, setRotate] = useState(-30); // 初始旋转度数为 -30
   const [showOverlay, setShowOverlay] = useState(false); // 控制遮罩显示的状态
   const [dimensions, setDimensions] = useState(0);
   const [disappear, setDisappear] = useState(false);
+
   const imgRef = useRef<any>();
   useAccountEffect({
     onConnect(data) {
@@ -72,7 +74,7 @@ const Home: NextPage = () => {
           className={`object-contain size-[25rem] absolute  ${!disappear ? "top-1/3" : "top-10"}  ${disappear ? "opacity-100" : "opacity-0"} `}
           style={{
             transition:
-              "transform  3s ease-in-out, top 3s ease-in-out,opacity 1s ease-in-out",
+              "transform  3s ease-in-out, top 2.5s ease-in-out,opacity 1s ease-in-out",
           }} // 应用动态样式
         ></Image>
         {!rotate && (

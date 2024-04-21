@@ -1,17 +1,42 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { useAccountEffect } from "wagmi";
+import {
+  useAccount,
+  useAccountEffect,
+  useReadContract,
+  useWaitForTransactionReceipt,
+  useWriteContract,
+} from "wagmi";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import gif1 from "@/public/pet/gif/1.gif";
 import headImg2 from "@/public/head2.png";
+import { contracts } from "@/contracts/contracts";
+import { useGlobalContext } from "@/context";
+import { formatEther, formatUnits } from "viem";
+import { daysFromNow } from "@/utils/timedate";
 
 interface RaiseProps {}
+type ItemType = {
+  fee: bigint;
+  feeToken: string;
+  feeTokenSymbol: string;
+  id: number;
+  itemBoost: number;
+  itemType: number;
+  lock: number;
+  name: string;
+};
 const Raise: React.FC<RaiseProps> = (props) => {
   const {} = props;
   const imgRef = useRef<any>();
   const [dimensions, setDimensions] = useState(0);
   const [showMoney, setShowMoney] = useState(false);
+  const { monster, viewContract, controllerContract } =
+    useGlobalContext();
+  const [vault, setVault] = useState<any>();
+  const [items, setItems] = useState<readonly ItemType[]>();
+  console.log("monster", monster);
   useEffect(() => {
     if (imgRef.current) {
       console.log(imgRef.current.offsetWidth, 1);
@@ -19,7 +44,103 @@ const Raise: React.FC<RaiseProps> = (props) => {
     }
   }, []);
 
+  const { chainId, address } = useAccount();
+
+  const { data: newItems, refetch } = useReadContract({
+    address: viewContract?.address,
+    abi: viewContract?.abi,
+    functionName: "getItems",
+  });
+  const replaceName = [
+    { name: "汉堡", icon: "🍔" },
+    { name: "雪碧", icon: "🥤" },
+    { name: "薯条", icon: "🍟" },
+    { name: "炸鸡", icon: "🍗" },
+  ];
+
+  //交易
+  const {
+    writeContract,
+    isPending,
+    data: hash,
+  } = useWriteContract();
+  const {
+    isLoading: isComfirming,
+    isSuccess: isComfirmed,
+  } = useWaitForTransactionReceipt({
+    hash,
+  });
+  if (isComfirmed) refetch();
+  console.log(isPending, isComfirming, "确认");
+  const handleClick = (id: number, fee: bigint) => {
+    if (isPending || isComfirming) return;
+
+    writeContract({
+      abi: controllerContract.abi,
+      address: controllerContract.address,
+      functionName: "purchaseBoost",
+      args: [id],
+      value: fee,
+    });
+  };
+
+  //载入零食
+  useEffect(() => {
+    if (newItems) {
+      const newArray = newItems.map((item) => {
+        return {
+          id: item.id,
+          name: item.name,
+          fee: BigInt(item.fee),
+          feeToken: item.feeToken,
+          feeTokenSymbol: item.feeTokenSymbol,
+          lock: item.lock,
+          itemType: item.itemType,
+          itemBoost: item.itemBoost,
+        };
+      });
+      setItems(newItems);
+    }
+  }, [newItems]);
+  console.log(items, "newItems");
+
+  //读取存款
+  const ethusd = 3548;
+  const apeusd = 1.96;
+  const { data: newVaults, refetch: refetchVaults } =
+    useReadContract({
+      address: viewContract?.address,
+      abi: viewContract?.abi,
+      functionName: "getVaults",
+      args: address && [address],
+    });
+
+  useEffect(() => {
+    if (newVaults) {
+      const newArray = newVaults.map((item) => {
+        return {
+          id: item.id,
+          token: item.token,
+          amount: item.amount,
+          expiry: item.expiry,
+        };
+      });
+      setVault(
+        newArray.sort((a, b) => a.expiry - b.expiry),
+      );
+    }
+  }, [newVaults]);
+  console.log(
+    "存款",
+    vault &&
+      Number(formatUnits(vault[1].amount, 18)) * ethusd,
+  );
+
+  //副作用
   const router = useRouter();
+  useEffect(() => {
+    if (!address) router.push("/");
+  }, [address]);
   useAccountEffect({
     onDisconnect() {
       router.push("/");
@@ -56,21 +177,44 @@ const Raise: React.FC<RaiseProps> = (props) => {
                 alt={"1"}
                 className="size-[8rem] cursor-pointer"
               ></Image>
-              <span>二狗</span>
+              <span>{monster?.name}</span>
               <span>现在心情很好！</span>
-              <span>能量：100</span>
-              <span>心情：97</span>
+              <span>能量：{monster?.energy}</span>
+              <span>心情：{monster?.mood}</span>
             </div>
           ) : (
-            <div className="fixed  flex flex-col justify-center items-center">
-              <span className="fixed top-[10rem] text-[5rem]">
-                存款
-              </span>
-              <div className="text-[3rem] mt-7">
-                <span>$0.2</span> <span>ETH</span>
-              </div>{" "}
-              <div className="text-[3rem] mt-10">
-                <span>$3.21</span> <span>TEA</span>
+            <div className="fixed  flex flex-col justify-center items-center pt-8">
+              <span className="  text-[5rem]">存款</span>
+              <div className="h-[15rem] w-[20rem] overflow-y-scroll mt-2 rounded-2xl">
+                {vault.map((item: any) => {
+                  return (
+                    <div key={item.id}>
+                      <div className="text-[1.5rem] mt-2 flex jus">
+                        <span className="w-[9rem]">
+                          $
+                          {Number(
+                            formatUnits(item.amount, 18),
+                          ) *
+                            Number(
+                              item.token ==
+                                "0x0000000000000000000000000000000000000000"
+                                ? ethusd
+                                : apeusd,
+                            )}
+                        </span>
+                        <span className="mr-7">
+                          {item.token ==
+                          "0x0000000000000000000000000000000000000000"
+                            ? "ETH"
+                            : "APE"}
+                        </span>
+                        <span className=" ">
+                          {daysFromNow(item.expiry)}day
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -87,34 +231,41 @@ const Raise: React.FC<RaiseProps> = (props) => {
         <div className="fixed   text-white   flex  justify-between   px-2   flex-wrap -bottom-[10rem]  h-[28rem] w-[35rem]  bg-[#ffc000] rounded-[4rem]  shadow-2xl shadow-[rgba(191,144,0,0.1)]"></div>
       </div>
       <div className="fixed bottom-0 px-4 left-1/2 -translate-x-1/2  h-[20rem] w-[35rem] flex   justify-between flex-wrap">
-        <button
-          type="button"
-          className={`cursor-pointer h-[7rem]  flex flex-col items-center justify-center    text-[2rem] text-[#ffc000] bg-white px-14 py-16 rounded-2xl shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
-        >
-          <span className="mb-4">小汉堡🍔</span>
-          <span>能量+1</span>
-        </button>{" "}
-        <button
-          type="button"
-          className={`cursor-pointer h-[7rem]  flex flex-col items-center justify-center    text-[2rem] text-[#ffc000] bg-white px-14 py-16 rounded-2xl shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
-        >
-          <span className="mb-4">小汉堡🍔</span>
-          <span>能量+1</span>
-        </button>{" "}
-        <button
-          type="button"
-          className={`cursor-pointer h-[7rem]  flex flex-col items-center justify-center    text-[2rem] text-[#ffc000] bg-white px-14 py-16 rounded-2xl shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
-        >
-          <span className="mb-4">小汉堡🍔</span>
-          <span>能量+1</span>
-        </button>{" "}
-        <button
-          type="button"
-          className={`cursor-pointer h-[7rem]  flex flex-col items-center justify-center    text-[2rem] text-[#ffc000] bg-white px-14 py-16 rounded-2xl shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
-        >
-          <span className="mb-4">小汉堡🍔</span>
-          <span>能量+1</span>
-        </button>{" "}
+        {!showMoney &&
+          items?.map((items, index) => {
+            return (
+              <button
+                key={items.id}
+                type="button"
+                className={`cursor-pointer h-[7rem] w-[14rem] flex flex-col items-center justify-center    text-[2rem] text-[#ffc000] bg-white px-2 py-16 rounded-2xl shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
+                onClick={() =>
+                  handleClick(
+                    items.id,
+                    items.feeTokenSymbol == "ETH"
+                      ? items.fee
+                      : BigInt(0),
+                  )
+                }
+              >
+                <span className="mb-4">
+                  {replaceName[index].name}{" "}
+                  {replaceName[index].icon}
+                </span>
+                <span>能量+{items.itemBoost}</span>
+              </button>
+            );
+          })}
+        {showMoney && (
+          <div className="text-4xl text-white absolute left-1/2 -translate-x-1/2 bottom-24 flex items-center flex-col justify-center  ">
+            <span className="mb-4">已经存钱1天了</span>
+            <button
+              type="button"
+              className={`text-[#ffc000] text-4xl   bg-white px-10 py-6 rounded-full shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
+            >
+              未能取出
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

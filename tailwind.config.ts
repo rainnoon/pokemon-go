@@ -73,6 +73,11 @@ const config = {
         },
         "show-up": {
           "0%": { opacity: "0" }, //   不用transform
+          "50%": { opacity: "0.3" },
+          "100%": { opacity: "1" },
+        },
+        "stand-up": {
+          "0%": { top: "30" }, //
           "50%": { opacity: "0.3" }, //
           "100%": { opacity: "1" }, //
         },
@@ -80,7 +85,7 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "show-up": "show-up 4s ease-in-out",
+        "show-up": "show-up 3s ease-in-out",
       },
       zIndex: {
         "100": "100",

@@ -2,7 +2,7 @@ import { defineChain } from "viem";
 import { Chain } from "wagmi/chains";
 
 export const myTest = {
-  id: 1337,
+  id: 31337,
   name: "myTest",
 
   nativeCurrency: {

@@ -4,6 +4,26 @@
 
 @layer base {
 
+  /*note 滚动条*/
+  /* 定制滚动条的宽度和背景颜色 */
+  div::-webkit-scrollbar {
+    width: 12px; /* 滚动条的宽度 */
+    background-color: #FFEFBF; /* 滚动条的背景颜色 */
+  }
+
+  /* 定制滚动条拇指的样式 */
+  div::-webkit-scrollbar-thumb {
+    background-color: #ffc000; /* 拇指的颜色 */
+    border-radius: 6px; /* 拇指的圆角 */
+    border: 3px solid #FFEFBF; /* 拇指的边框和滚动条背景色相同，可以创造“内嵌”效果 */
+  }
+
+  /* 定制滚动条轨道的样式 */
+  div::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #a79314; /* 轨道的阴影效果 */
+    border-radius: 10px; /* 轨道的圆角 */
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
