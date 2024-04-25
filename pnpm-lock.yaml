@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@hookform/resolvers':
     specifier: ^3.3.4
-    version: 3.3.4(react-hook-form@7.51.3)
+    version: 3.3.4(react-hook-form.tsx@7.51.3)
   '@pixi/spine-pixi':
     specifier: ^1.0.8
     version: 1.0.8(pixi.js@8.1.0)

@@ -6,6 +6,7 @@ import "./globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import {
   Chain,
+  ConnectButton,
   darkTheme,
   getDefaultConfig,
   RainbowKitProvider,
@@ -46,9 +47,9 @@ export default function RootLayout({
               })}
             >
               <GlobalContextProvider>
-                {" "}
                 <Loading></Loading>
                 <MyConnectButton></MyConnectButton>
+                {/*<ConnectButton></ConnectButton>*/}
                 {children}
               </GlobalContextProvider>
             </RainbowKitProvider>

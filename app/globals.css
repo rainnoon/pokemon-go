@@ -95,3 +95,32 @@
     @apply bg-background text-foreground;
   }
 }
+/*note 目前适配 1024x768 1440x900  1600x900  1920x1080 2560x1440*/
+@media (min-width: 1024px) {
+  html {
+    font-size: 15px; /* 提高字体大小 */
+  }
+}
+@media (min-width: 1440px) {
+  html {
+    font-size: 18px; /* 提高字体大小 */
+  }
+}
+
+@media (min-width: 1600px) {
+  html {
+    font-size: 16px; /* 提高字体大小 */
+  }
+}
+
+@media (min-width: 1920px) {
+  html {
+    font-size: 20px; /* 提高字体大小 */
+  }
+}
+
+@media (min-width: 2560px) {
+  html {
+    font-size: 26px; /* 提高字体大小 */
+  }
+}

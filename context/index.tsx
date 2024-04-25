@@ -2,6 +2,8 @@
 import React, {
   createContext,
   useContext,
+  useEffect,
+  useRef,
   useState,
 } from "react";
 import { useAccount, useReadContract } from "wagmi";
@@ -20,6 +22,7 @@ interface GlobalContextType {
   setLoadingMessage: React.Dispatch<
     React.SetStateAction<string>
   >;
+  refetchMonster: any;
 }
 
 const GlobalContext = createContext<
@@ -31,7 +34,7 @@ export const GlobalContextProvider = ({
 }: any) => {
   const [loadingShow, setLoadingShow] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState("");
-
+  const refetchNew = useRef<any>();
   //获取monster数据
   const { chainId, address } = useAccount();
   let contract =
@@ -43,12 +46,16 @@ export const GlobalContextProvider = ({
 
   let abi = contract?.abi;
 
-  const { data: monster } = useReadContract({
-    abi,
-    address: contract?.address,
-    functionName: "getMonster",
-    args: [address!],
-  });
+  const { data: monster, refetch: refetchMonster } =
+    useReadContract({
+      abi,
+      address: contract?.address,
+      functionName: "getMonster",
+      args: [address!],
+    });
+  useEffect(() => {
+    refetchNew.current = refetchMonster;
+  }, [refetchMonster]);
   return (
     <GlobalContext.Provider
       value={{
@@ -59,6 +66,7 @@ export const GlobalContextProvider = ({
         monster,
         viewContract: contract,
         controllerContract,
+        refetchMonster: refetchNew,
       }}
     >
       {children}

@@ -20,13 +20,26 @@ const SpineTest: React.FC<SpineTestProps> = (props) => {
   const pet1Ref = useRef<any>(undefined);
   useEffect(() => {
     // 获取根元素的字体大小
+    //note 分辨率适配
     const fontSize = parseFloat(
       getComputedStyle(document.documentElement).fontSize,
     );
+    console.log(fontSize, "font");
+    const radioWidth = {
+      15: 10,
+      18: 10,
+      16: 10,
+      20: 10,
+      26: 10,
+    };
 
     // 计算基于 'rem' 的画布尺寸
-    const canvasWidth = fontSize * 25; // 假设你想要的宽度是 37.5rem
-    const canvasHeight = fontSize * 20; // 同样，高度也是 37.5rem
+    const canvasWidth =
+      fontSize *
+      radioWidth[fontSize as keyof typeof radioWidth]; // 假设你想要的宽度是 37.5rem
+    const canvasHeight =
+      fontSize *
+      radioWidth[fontSize as keyof typeof radioWidth]; // 同样，高度也是 37.5rem
     const petSize = fontSize * 8; // 同样，高度也是 37.5rem
 
     // 确保 PIXI 应用程序只初始化一次
@@ -35,8 +48,8 @@ const SpineTest: React.FC<SpineTestProps> = (props) => {
         const app = new Application();
         //todo 转rem
         await app.init({
-          width: 140, // 或者根据实际需要设置
-          height: 160,
+          width: canvasWidth, // 或者根据实际需要设置
+          height: canvasHeight,
           backgroundColor: 0xffc000, // 需要十六进制格式
 
           // resizeTo: window,
@@ -105,49 +118,26 @@ const SpineTest: React.FC<SpineTestProps> = (props) => {
           const container1 = new Container();
 
           container1.addChild(pet1);
-          // container2.addChild(pet2);
-          // container3.addChild(pet3);
-          // container4.addChild(pet4);
-          //
-          // const gridPadding = 100; // 设置一个边距
-          // const baseX = gridPadding;
-          // const baseY = gridPadding;
-          // const midX = canvasWidth / 2;
-          // const midY = canvasHeight / 2;
 
-          container1.position.set(70, 125); // 左上角
-          // container2.position.set(midX, baseY); // 右上角
-          // container3.position.set(baseX, midY); // 左下角
-          // container4.position.set(midX, midY); // 右下角
-          //
-          // // Add containers to the stage
+          //分辨率适配
+          const radioScale = {
+            15: 1.0,
+            18: 1.2,
+            16: 1.2,
+            20: 1.2,
+            26: 1.4,
+          };
+
+          pet1.scale.set(
+            radioScale[fontSize as keyof typeof radioScale],
+          );
+          container1.position.set(
+            canvasWidth / 2,
+            canvasHeight / 1.2,
+          ); // 左上角
+          // container1.scale(1.2);
+
           pixiApp.current.stage.addChild(container1);
-          // pixiApp.current.stage.addChild(container2);
-          // pixiApp.current.stage.addChild(container3);
-          // pixiApp.current.stage.addChild(container4);
-
-          // pet1.eventMode = "static";
-          // container1.eventMode = "static";
-          // pet1.cursor = "pointer";
-          // container1.cursor = "pointer";
-          // pet1.on("pointerdown", () => {
-          //   console.log("按下");
-          //   // 设置从当前动画到 win 动画的过渡
-          //   pet1.state.setAnimation(0, "win", false);
-          //   pet1.state.addAnimation(0, "stand", true, 0); // 完成后返回站立状态
-          // });
-          // pet1.on("pointerenter", () => {
-          //   console.log("按下");
-          //   // 设置从当前动画到 win 动画的过渡
-          //   pet1.state.setAnimation(0, "win", false);
-          //   pet1.state.addAnimation(0, "stand", true, 0); // 完成后返回站立状态
-          // });
-          // container1.on("pointerenter", () => {
-          //   console.log("按下");
-          //   // 设置从当前动画到 win 动画的过渡
-          //   pet1.state.setAnimation(0, "win", false);
-          //   pet1.state.addAnimation(0, "stand", true, 0); // 完成后返回站立状态
-          // });
 
           pet1Ref.current = pet1;
           //监听

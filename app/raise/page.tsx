@@ -10,12 +10,16 @@ import {
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import gif1 from "@/public/pet/gif/1.gif";
+import gif2 from "@/public/pet/gif/2.gif";
+import gif3 from "@/public/pet/gif/3.gif";
+import gif4 from "@/public/pet/gif/4.gif";
 import headImg2 from "@/public/head2.png";
 import { contracts } from "@/contracts/contracts";
 import { useGlobalContext } from "@/context";
 import { formatEther, formatUnits } from "viem";
 import { daysFromNow } from "@/utils/timedate";
 
+const gifs = [gif1, gif2, gif3, gif4];
 interface RaiseProps {}
 type ItemType = {
   fee: bigint;
@@ -32,8 +36,12 @@ const Raise: React.FC<RaiseProps> = (props) => {
   const imgRef = useRef<any>();
   const [dimensions, setDimensions] = useState(0);
   const [showMoney, setShowMoney] = useState(false);
-  const { monster, viewContract, controllerContract } =
-    useGlobalContext();
+  const {
+    monster,
+    viewContract,
+    refetchMonster,
+    controllerContract,
+  } = useGlobalContext();
   const [vault, setVault] = useState<any>();
   const [items, setItems] = useState<readonly ItemType[]>();
   console.log("monster", monster);
@@ -70,7 +78,7 @@ const Raise: React.FC<RaiseProps> = (props) => {
   } = useWaitForTransactionReceipt({
     hash,
   });
-  if (isComfirmed) refetch();
+  if (isComfirmed) refetchMonster.current();
   console.log(isPending, isComfirming, "确认");
   const handleClick = (id: number, fee: bigint) => {
     if (isPending || isComfirming) return;
@@ -114,6 +122,10 @@ const Raise: React.FC<RaiseProps> = (props) => {
       functionName: "getVaults",
       args: address && [address],
     });
+  //重新获取存款
+  useEffect(() => {
+    refetchVaults();
+  }, [showMoney]);
 
   useEffect(() => {
     if (newVaults) {
@@ -130,11 +142,11 @@ const Raise: React.FC<RaiseProps> = (props) => {
       );
     }
   }, [newVaults]);
-  console.log(
-    "存款",
-    vault &&
-      Number(formatUnits(vault[1].amount, 18)) * ethusd,
-  );
+  // console.log(
+  //   "存款",
+  //   vault &&
+  //     Number(formatUnits(vault[1]?.amount, 18)) * ethusd,
+  // );
 
   //副作用
   const router = useRouter();
@@ -172,11 +184,15 @@ const Raise: React.FC<RaiseProps> = (props) => {
           >{`>`}</span>
           {!showMoney ? (
             <div className="fixed  flex flex-col justify-center items-center">
-              <Image
-                src={gif1}
-                alt={"1"}
-                className="size-[8rem] cursor-pointer"
-              ></Image>
+              {monster?.base && (
+                <Image
+                  src={gifs[(monster?.base ?? 1) - 1]}
+                  //note 不是 src={`gifs[${(monster?.base ?? 1) - 1}]`}
+                  //因为用的是变量而不是字符串
+                  alt={"1"}
+                  className="size-[8rem] cursor-pointer"
+                ></Image>
+              )}
               <span>{monster?.name}</span>
               <span>现在心情很好！</span>
               <span>能量：{monster?.energy}</span>
@@ -185,7 +201,7 @@ const Raise: React.FC<RaiseProps> = (props) => {
           ) : (
             <div className="fixed  flex flex-col justify-center items-center pt-8">
               <span className="  text-[5rem]">存款</span>
-              <div className="h-[15rem] w-[20rem] overflow-y-scroll mt-2 rounded-2xl">
+              <div className="h-[15rem] w-[20rem] overflow-y-auto mt-2 rounded-2xl">
                 {vault.map((item: any) => {
                   return (
                     <div key={item.id}>

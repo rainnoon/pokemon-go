@@ -33,17 +33,17 @@ const ChooseModal: React.FC<ChooseModalProps> = (props) => {
   const [name, setName] = useState("");
 
   //如果注册了就跳转
-  const { monster } = useGlobalContext();
+  const { monster, refetchMonster } = useGlobalContext();
   useEffect(() => {
-    if (monster) router.push("/raise");
+    if (monster?.id) router.push("/raise");
   }, [monster]);
 
   //不能给abi和contract赋值类型，这样就没有提示了
   let contract =
     contracts[chainId as keyof typeof contracts]
-      .ZenMonController;
+      ?.ZenMonController;
 
-  let abi = contract.abi;
+  let abi = contract?.abi;
 
   //note 这个类型转换非常牛逼
   // abi = contracts[chainId]?.ZenMonViewer;
@@ -62,7 +62,13 @@ const ChooseModal: React.FC<ChooseModalProps> = (props) => {
     hash,
   });
   useEffect(() => {
-    if (isConfirmed) router.push("/raise");
+    if (isConfirmed) {
+      refetchMonster.current({
+        cancelRefetch: true,
+        throwOnError: false,
+      });
+      router.push("/raise");
+    }
   }, [isConfirmed]);
   console.log(isConfirming, isPending, "确认");
   const handleClick = () => {
@@ -118,7 +124,7 @@ const ChooseModal: React.FC<ChooseModalProps> = (props) => {
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className={`fixed  focus:border-[#08A3E5] focus:border-[0.5rem] w-[15rem] left-1/2 -translate-x-1/2 bottom-12 text-[1.5rem]  px-0 text-center flex justify-center placeholder-[#ffc000] text-[#ffc000] bg-white   py-4 rounded-full shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
+          className={`fixed  focus:border-[#08A3E5] focus:border-[0.5rem] w-[15rem] left-1/2 -translate-x-1/2 bottom-7 text-[1.5rem]  px-0 text-center flex justify-center placeholder-[#ffc000] text-[#ffc000] bg-white   py-4 rounded-full shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
           placeholder={"给他起个名字吧"}
         ></input>
       </div>
