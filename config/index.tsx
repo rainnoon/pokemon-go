@@ -3,7 +3,10 @@ import { Chain, mainnet, sepolia } from "wagmi/chains";
 import { myTest, okxNet } from "@/config/chain";
 
 export const config = createConfig({
-  chains: [mainnet, sepolia, okxNet, myTest],
+  chains: [
+    sepolia,
+    // myTest
+  ],
 
   transports: {
     [mainnet.id]: http("https://eth.llamarpc.com"),
