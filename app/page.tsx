@@ -41,46 +41,47 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <div className="w-screen h-screen flex justify-center relative ">
+      <div className="w-screen h-screen flex justify-center relative overflow-hidden">
         <img
-          ref={imgRef}
-          src="/cover.jpg"
-          alt={"cover"}
-          className={`object-contain h-screen fixed left-1/2 -translate-x-1/2   `}
-        ></img>
+            ref={imgRef}
+            src="/cover.jpg"
+            alt="cover"
+            className=" w-screen object-contain "
+        />
         <div
-          className={`absolute h-screen   bg-[#2E2300] ${rotate == 0 ? "opacity-30" : "opacity-0"} `}
-          style={{
-            width: `${dimensions}px`,
-            transition: "opacity 1s ease-in-out",
-          }}
-        ></div>{" "}
+            className={`absolute h-screen   bg-[#2E2300] ${rotate == 0 ? "opacity-30" : "opacity-0"} `}
+            style={{
+              width: `${dimensions}px`,
+              transition: "opacity 1s ease-in-out",
+            }}
+        ></div>
+        {" "}
         {/*// 淡黄色遮罩层*/}
         {/*标志*/}
         <Image
-          src={headImg}
-          alt={"cover"}
-          className={`object-contain size-[25rem] absolute ${rotate == 0 ? "top-1/3" : "top-10"} ${!disappear ? "opacity-100" : "opacity-0"} `}
-          style={{
-            transform: `rotate(${rotate}deg)`,
-            transition:
-              "transform  3s ease-in-out, top 3s ease-in-out,opacity 0.5s ease-in-out",
-          }} // 应用动态样式
+            src={headImg}
+            alt={"cover"}
+            className={`object-contain size-[25rem] left-4 sm:left-auto top-20 sm:top-auto   absolute ${rotate == 0 ? "top-1/3" : "top-10"} ${!disappear ? "opacity-100" : "opacity-0"} `}
+            style={{
+              transform: `rotate(${rotate}deg)`,
+              transition:
+                  "transform  3s ease-in-out, top 3s ease-in-out,opacity 0.5s ease-in-out",
+            }} // 应用动态样式
         ></Image>{" "}
         {/*标志2*/}
         <Image
-          src={headImg2}
-          alt={"cover"}
-          className={`object-contain size-[25rem] absolute  ${!disappear ? "top-1/3" : "top-10"}  ${disappear ? "opacity-100" : "opacity-0"} `}
-          style={{
-            transition:
-              "transform  3s ease-in-out, top 2.5s ease-in-out,opacity 1s ease-in-out",
-          }} // 应用动态样式
+            src={headImg2}
+            alt={"cover"}
+            className={`object-contain size-[25rem] absolute  ${!disappear ? "top-1/3" : "top-10"}  ${disappear ? "opacity-100" : "opacity-0"} `}
+            style={{
+              transition:
+                  "transform  3s ease-in-out, top 2.5s ease-in-out,opacity 1s ease-in-out",
+            }} // 应用动态样式
         ></Image>
         {!rotate && (
-          <ChooseModal
-            className={`${!disappear ? "opacity-0" : "animate-show-up"} `}
-          ></ChooseModal>
+            <ChooseModal
+                className={`${!disappear ? "opacity-0" : "animate-show-up"} `}
+            ></ChooseModal>
         )}
       </div>
     </>
