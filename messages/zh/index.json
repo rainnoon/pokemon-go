@@ -16,5 +16,27 @@
     "next": "下一步",
     "save": "保存",
     "cancel": "取消"
+  },
+  "food": {
+    "hamburger": "汉堡",
+    "sprite": "雪碧",
+    "fries": "薯条",
+    "chicken": "炸鸡"
+  },
+  "raise": {
+    "mood": "心情",
+    "deposit": "存款",
+    "energy": "能量",
+    "day": "天",
+    "depositDays": "已经存钱{days}天了",
+    "cannotWithdraw": "未能取出",
+    "currencies": {
+      "eth": "ETH",
+      "ape": "APE"
+    },
+    "status": {
+      "goodMood": "现在心情很好！",
+      "energyLevel": "能量：{level}"
+    }
   }
 }

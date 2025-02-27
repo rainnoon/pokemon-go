@@ -2,7 +2,7 @@
   "app": {
     "title": "Pokemon Go",
     "welcome": "Welcome to Pokemon Go",
-    "description": "Catch, train, and battle with your Pokemon",
+    "description": "Catch, train and battle your Pokemon",
     "buttons": {
       "start": "Start Game",
       "settings": "Settings",
@@ -16,5 +16,27 @@
     "next": "Next",
     "save": "Save",
     "cancel": "Cancel"
+  },
+  "food": {
+    "hamburger": "Hamburger",
+    "sprite": "Sprite",
+    "fries": "French Fries",
+    "chicken": "Fried Chicken"
+  },
+  "raise": {
+    "mood": "Mood",
+    "deposit": "Deposit",
+    "energy": "Energy",
+    "day": "day",
+    "depositDays": "Deposited for {days} days",
+    "cannotWithdraw": "Cannot withdraw",
+    "currencies": {
+      "eth": "ETH",
+      "ape": "APE"
+    },
+    "status": {
+      "goodMood": "In a good mood now!",
+      "energyLevel": "Energy: {level}"
+    }
   }
 }

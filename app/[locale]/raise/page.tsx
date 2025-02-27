@@ -18,6 +18,7 @@ import { contracts } from "@/contracts/contracts";
 import { useGlobalContext } from "@/context";
 import { formatEther, formatUnits } from "viem";
 import { daysFromNow } from "@/utils/timedate";
+import { useTranslations } from "next-intl";
 
 const gifs = [gif1, gif2, gif3, gif4];
 interface RaiseProps {}
@@ -59,11 +60,13 @@ const Raise: React.FC<RaiseProps> = (props) => {
     abi: viewContract?.abi,
     functionName: "getItems",
   });
+  const t = useTranslations("food");
+  const tr = useTranslations("raise");
   const replaceName = [
-    { name: "汉堡", icon: "🍔" },
-    { name: "雪碧", icon: "🥤" },
-    { name: "薯条", icon: "🍟" },
-    { name: "炸鸡", icon: "🍗" },
+    { name: t("hamburger"), icon: "🍔" },
+    { name: t("sprite"), icon: "🥤" },
+    { name: t("fries"), icon: "🍟" },
+    { name: t("chicken"), icon: "🍗" },
   ];
 
   //交易
@@ -107,7 +110,7 @@ const Raise: React.FC<RaiseProps> = (props) => {
           itemBoost: item.itemBoost,
         };
       });
-      setItems(newItems);
+      setItems(newArray);
     }
   }, [newItems]);
   console.log(items, "newItems");
@@ -194,13 +197,21 @@ const Raise: React.FC<RaiseProps> = (props) => {
                 ></Image>
               )}
               <span>{monster?.name}</span>
-              <span>现在心情很好！</span>
-              <span>能量：{monster?.energy}</span>
-              <span>心情：{monster?.mood}</span>
+              <span>{tr("status.goodMood")}</span>
+              <span>
+                {tr("status.energyLevel", {
+                  level: monster?.energy,
+                })}
+              </span>
+              <span>
+                {tr("mood")}：{monster?.mood}
+              </span>
             </div>
           ) : (
             <div className="fixed  flex flex-col justify-center items-center pt-8">
-              <span className="  text-[5rem]">存款</span>
+              <span className="  text-[5rem]">
+                {tr("deposit")}
+              </span>
               <div className="h-[15rem] w-[20rem] overflow-y-auto mt-2 rounded-2xl">
                 {vault.map((item: any) => {
                   return (
@@ -221,11 +232,12 @@ const Raise: React.FC<RaiseProps> = (props) => {
                         <span className="mr-7">
                           {item.token ==
                           "0x0000000000000000000000000000000000000000"
-                            ? "ETH"
-                            : "APE"}
+                            ? tr("currencies.eth")
+                            : tr("currencies.ape")}
                         </span>
                         <span className=" ">
-                          {daysFromNow(item.expiry)}day
+                          {daysFromNow(item.expiry)}
+                          {tr("day")}
                         </span>
                       </div>
                     </div>
@@ -267,18 +279,22 @@ const Raise: React.FC<RaiseProps> = (props) => {
                   {replaceName[index].name}{" "}
                   {replaceName[index].icon}
                 </span>
-                <span>能量+{items.itemBoost}</span>
+                <span>
+                  {tr("energy")}+{items.itemBoost}
+                </span>
               </button>
             );
           })}
         {showMoney && (
-          <div className="text-4xl text-white absolute left-1/2 -translate-x-1/2 bottom-24 flex items-center flex-col justify-center  ">
-            <span className="mb-4">已经存钱1天了</span>
+          <div className="text-4xl text-white w-full absolute left-1/2 -translate-x-1/2 bottom-24 flex items-center flex-col justify-center  ">
+            <span className="mb-4">
+              {tr("depositDays", { days: 1 })}
+            </span>
             <button
               type="button"
               className={`text-[#ffc000] text-4xl   bg-white px-10 py-6 rounded-full shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
             >
-              未能取出
+              {tr("cannotWithdraw")}
             </button>
           </div>
         )}
