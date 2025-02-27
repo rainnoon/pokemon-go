@@ -1,0 +1,20 @@
+{
+  "app": {
+    "title": "Pokemon Go",
+    "welcome": "Welcome to Pokemon Go",
+    "description": "Catch, train, and battle with your Pokemon",
+    "buttons": {
+      "start": "Start Game",
+      "settings": "Settings",
+      "about": "About"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "back": "Back",
+    "next": "Next",
+    "save": "Save",
+    "cancel": "Cancel"
+  }
+}

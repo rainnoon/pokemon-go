@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={AaF.className}>
+    <html lang="zh" className={AaF.className}>
       <body>
         <WagmiProvider config={config}>
           <QueryClientProvider client={queryClient}>

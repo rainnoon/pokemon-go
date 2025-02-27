@@ -92,7 +92,7 @@ const ChooseModal: React.FC<ChooseModalProps> = (props) => {
   return (
     <>
       <div
-        className={`fixed z-20 top-1/2 -translate-y-1/3 flex justify-center ${className}`}
+        className={`fixed z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/3 flex justify-center ${className}`}
         style={style}
       >
         <div className="h-[30rem] w-[25rem]  bg-[#ffc000] rounded-[4rem]  shadow-2xl shadow-[rgba(191,144,0,0.1)]"></div>
