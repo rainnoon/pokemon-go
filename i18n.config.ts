@@ -1,11 +1,16 @@
-import { getRequestConfig } from 'next-intl/server';
-import { requestLocale } from './middleware';
+import { notFound } from "next/navigation";
+import { getRequestConfig } from "next-intl/server";
 
-export default getRequestConfig(async () => {
-  const locale = await requestLocale();
+// Can be imported from a shared config
+const locales = ["en", "zh", "ja", "ko"];
+
+export default getRequestConfig(async ({ locale }) => {
+  // Validate that the incoming `locale` parameter is valid
+  if (!locales.includes(locale)) notFound();
+
   return {
-    locale,
-    messages: (await import(`./messages/${locale}/index.json`)).default,
-    timeZone: 'Asia/Shanghai'
+    messages: (
+      await import(`./messages/${locale}/index.json`)
+    ).default,
   };
 });
