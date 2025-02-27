@@ -17,6 +17,14 @@
     "save": "Save",
     "cancel": "Cancel"
   },
+  "chooseModal": {
+    "title": "Choose Your Pokemon",
+    "namePlaceholder": "Give it a name",
+    "enterButton": {
+      "default": "Enter",
+      "waiting": "Waiting"
+    }
+  },
   "food": {
     "hamburger": "Hamburger",
     "sprite": "Sprite",
@@ -27,8 +35,8 @@
     "mood": "Mood",
     "deposit": "Deposit",
     "energy": "Energy",
-    "day": "day",
-    "depositDays": "Deposited for {days} days",
+    "day": "Day",
+    "depositDays": "Has been depositing for {days} days",
     "cannotWithdraw": "Cannot withdraw",
     "currencies": {
       "eth": "ETH",
@@ -36,6 +44,17 @@
     },
     "status": {
       "goodMood": "In a good mood now!",
+      "energyLevel": "Energy: {level}"
+    }
+  },
+  "pokemon": {
+    "status": {
+      "hungry": "Is hungry",
+      "tired": "Is tired",
+      "happy": "Is happy",
+      "sleeping": "Is sleeping",
+      "playing": "Is playing",
+      "goodMood": "In a good mood!",
       "energyLevel": "Energy: {level}"
     }
   }

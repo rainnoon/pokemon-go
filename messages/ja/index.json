@@ -4,7 +4,7 @@
     "welcome": "ポケモンGOへようこそ",
     "description": "ポケモンを捕まえて、育てて、バトルしよう",
     "buttons": {
-      "start": "ゲームを始める",
+      "start": "ゲームスタート",
       "settings": "設定",
       "about": "概要"
     }
@@ -17,14 +17,35 @@
     "save": "保存",
     "cancel": "キャンセル"
   },
-  "food": {
-    "hamburger": "ハンバーガー"
-  },
   "chooseModal": {
     "title": "ポケモンを選んでください",
     "namePlaceholder": "名前をつけてください",
-    "enter": "決定",
-    "waiting": "待機中"
+    "enterButton": {
+      "default": "決定",
+      "waiting": "待機中"
+    }
+  },
+  "food": {
+    "hamburger": "ハンバーガー",
+    "sprite": "スプライト",
+    "fries": "フライドポテト",
+    "chicken": "フライドチキン"
+  },
+  "raise": {
+    "mood": "機嫌",
+    "deposit": "預金",
+    "energy": "エネルギー",
+    "day": "日",
+    "depositDays": "{days}日間預金を続けています",
+    "cannotWithdraw": "引き出しできません",
+    "currencies": {
+      "eth": "ETH",
+      "ape": "APE"
+    },
+    "status": {
+      "goodMood": "機嫌が良いです！",
+      "energyLevel": "エネルギー：{level}"
+    }
   },
   "pokemon": {
     "status": {

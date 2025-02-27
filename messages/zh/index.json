@@ -17,6 +17,14 @@
     "save": "保存",
     "cancel": "取消"
   },
+  "chooseModal": {
+    "title": "选择你的宝可梦",
+    "namePlaceholder": "给他起个名字吧",
+    "enterButton": {
+      "default": "进入",
+      "waiting": "等待"
+    }
+  },
   "food": {
     "hamburger": "汉堡",
     "sprite": "雪碧",
