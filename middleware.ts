@@ -2,12 +2,12 @@ import createIntlMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 
 // 支持的语言列表
-export const locales = ['en', 'zh', 'ja', 'ko'] as const;
+export const locales = ["en", "zh", "ja"] as const;
 export type Locale = (typeof locales)[number];
 
 const handleI18nRouting = createIntlMiddleware({
   locales,
-  defaultLocale: 'en',
+  defaultLocale: "en",
 });
 
 export async function middleware(request: NextRequest) {
@@ -19,13 +19,14 @@ export async function middleware(request: NextRequest) {
     .split("-")[0];
 
   const LOCALES = locales;
+  console.log(preferredLocale, "preferredLocale");
   const hasLocale = LOCALES.some((locale) =>
-    pathname.startsWith(`/${locale}`)
+    pathname.startsWith(`/${locale}`),
   );
 
   if (!hasLocale) {
     if (
-      preferredLocale && 
+      preferredLocale &&
       LOCALES.includes(preferredLocale as Locale) &&
       preferredLocale !== "en"
     ) {
@@ -48,7 +49,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    '/((?!api|_next|pet|.*\\.[^/]+$).*)'
-  ]
+  matcher: ["/((?!api|_next|pet|.*\\.[^/]+$).*)"],
 };
