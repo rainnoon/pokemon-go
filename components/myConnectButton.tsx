@@ -83,7 +83,7 @@ const MyConnectButton: React.FC<MyConnectButtonProps> = (
                         type="button"
                         className={`fixed left-1/2 -translate-x-1/2 bottom-24 lg:text-[3rem] whitespace-nowrap  text-[2rem]   text-white bg-[#ffc000] px-14 py-4 rounded-full shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
                       >
-                        进入宝可梦世界
+                        Play Now
                       </button>
                     );
                   }

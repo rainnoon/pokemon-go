@@ -265,7 +265,7 @@ const Raise: React.FC<RaiseProps> = (props) => {
               <button
                 key={items.id}
                 type="button"
-                className={`cursor-pointer h-[7rem] w-[14rem] flex flex-col items-center justify-center    text-[2rem] text-[#ffc000] bg-white px-2 py-16 rounded-2xl shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
+                className={`cursor-pointer h-[7rem] w-[14rem] flex flex-col items-center justify-center    text-2xl text-[#ffc000] bg-white px-2 py-16 rounded-2xl shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
                 onClick={() =>
                   handleClick(
                     items.id,
