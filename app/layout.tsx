@@ -20,11 +20,14 @@ import {
 import { config } from "@/config";
 import Loading from "@/components/myUi/loading";
 import { GlobalContextProvider } from "@/context";
-import { AaF } from "@/public/font";
 import MyConnectButton from "@/components/myConnectButton";
 import React from "react";
 
 const queryClient = new QueryClient();
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["700"],
+});
 
 export default function RootLayout({
   children,
@@ -32,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh" className={AaF.className}>
+    <html lang="en" className={inter.className}>
       <body>
         <WagmiProvider config={config}>
           <QueryClientProvider client={queryClient}>

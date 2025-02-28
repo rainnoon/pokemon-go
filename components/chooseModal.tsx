@@ -92,7 +92,7 @@ const ChooseModal: React.FC<ChooseModalProps> = (props) => {
     setActiveIndex(index); // 设置当前激活的组件
   };
 
-  const t = useTranslations('chooseModal');
+  const t = useTranslations("chooseModal");
 
   return (
     <>
@@ -101,8 +101,8 @@ const ChooseModal: React.FC<ChooseModalProps> = (props) => {
         style={style}
       >
         <div className="h-[30rem] w-[25rem]  bg-[#ffc000] rounded-[4rem]  shadow-2xl shadow-[rgba(191,144,0,0.1)]"></div>
-        <span className="absolute top-3 text-white text-[2rem] ">
-          {t('title')}
+        <span className="absolute top-3 text-white text-2xl ">
+          {t("title")}
         </span>
         <div className="flex h-[20rem] w-[25rem] absolute  top-14   flex-wrap justify-between px-10  ">
           {/*  note gpt写的有点牛逼*/}
@@ -129,8 +129,8 @@ const ChooseModal: React.FC<ChooseModalProps> = (props) => {
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className={`fixed  focus:border-[#08A3E5] focus:border-[0.5rem] w-[15rem] left-1/2 -translate-x-1/2 bottom-7 text-[1.5rem]  px-0 text-center flex justify-center placeholder-[#ffc000] text-[#ffc000] bg-white   py-4 rounded-full shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
-          placeholder={t('namePlaceholder')}
+          className={`fixed  focus:border-[#08A3E5] focus:border-[0.5rem] w-[15rem] left-1/2 -translate-x-1/2 bottom-7 text-xl  px-0 text-center flex justify-center placeholder-[#ffc000] text-[#ffc000] bg-white   py-4 rounded-full shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
+          placeholder={t("namePlaceholder")}
         ></input>
       </div>
       <button
@@ -139,7 +139,9 @@ const ChooseModal: React.FC<ChooseModalProps> = (props) => {
         className={`fixed cursor-pointer z-20 left-1/2 -translate-x-1/2  bottom-2 text-[2rem] text-white bg-[#ffc000] px-14 py-2 rounded-[5rem] shadow-2xl shadow-[rgba(191,144,0,0.5)]  `}
         onClick={handleClick}
       >
-        {isConfirming || isPending ? t('enterButton.waiting') : t('enterButton.default')}
+        {isConfirming || isPending
+          ? t("enterButton.waiting")
+          : t("enterButton.default")}
         {/*note fixed嵌套有问题，如果想相对于body，就脱离嵌套*/}
       </button>{" "}
     </>
