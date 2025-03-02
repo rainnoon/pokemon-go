@@ -1,22 +1,11 @@
-# 推送
+# Pokemon GO Savings Bank / ポケモンGO 貯金箱
 
-添加
+## English
+Pokemon GO is a Web3 savings application,
+inspired by ZenMon.
+It features a completely redesigned frontend interface and enhanced smart contract functionality, allowing users to withdraw their deposits.
 
-```
-git remote add git@github.com:wuyifan6688/web3-template.git
-git push origin master:main --force
-
-```
-
-
-
-
-
-切换远程分支
-
-```
- git remote set-url origin git@github.com:wuyifan6688/web3-template.git
- git push origin main --force
-
-```
-
+## 日本語
+ポケモンGOはWeb3の貯金アプリケーションです。
+ZenMonからインスピレーションを得て開発されました。
+全く新しいフロントエンドインターフェースを設計し、スマートコントラクトの機能を改善して、ユーザーが預金を引き出すことを可能にしました。
